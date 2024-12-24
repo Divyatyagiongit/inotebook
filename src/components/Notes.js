@@ -13,7 +13,7 @@ const Notes = () => {
             {
                 notes.map(
                     (notes) => {
-                        return <NoteItem note={notes}/>
+                        return <NoteItem key={notes._id} note={notes}/>
                     }
                 )
             }
