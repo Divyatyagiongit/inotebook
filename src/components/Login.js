@@ -30,13 +30,12 @@ function Login() {
         <div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlfor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" value={cred.email} onChange={onChange} name="email" aria-describedby="emailHelp"/>
-                        <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                    <label htmlfor="email" className="form-label">Email address*</label>
+                    <input type="email" className="form-control" id="email" value={cred.email} onChange={onChange} name="email" aria-describedby="emailHelp" requried/>
                 </div>
                 <div className="mb-3">
-                    <label htmlfor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" value={cred.password} onChange={onChange} name="password"/>
+                    <label htmlfor="password" className="form-label">Password*</label>
+                    <input type="password" className="form-control" id="password" value={cred.password} onChange={onChange} name="password" required/>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>

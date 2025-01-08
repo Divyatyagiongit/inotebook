@@ -15,14 +15,15 @@ router.get('/', (req, res) => {
 })
 //Route1:: creating a user using: POST "api/auth". Desn't require auth.
 router.post('/createuser', [
-    body('name', 'Enter name value').isLength({ min: 3 }),
-    body('email').isEmail(),
-    body('password').isLength({ min: 5 }),
+    body('name', 'Enter a name value').isLength({ min: 3 }),
+    body('email','Enter valid email').isEmail(),
+    body('password','Password must be atleast 5 characters').isLength({ min: 5 }),
 ], async (req, res) => {
     //if there are errors, return bad request and errors
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ success,  errors: errors.array() });
     }
     //check whether user exist or not
     let user = await User.findOne({ email: req.body.email });
@@ -32,7 +33,7 @@ router.post('/createuser', [
         const secPwd = await bcrypt.hash(req.body.password, salt);
 
         if (user) {
-            return res.status(400).json({ error: "Please try with different email.User already exist with this email" });
+            return res.status(400).json({ success,  error: "Please try with different email.User already exist with this email" });
         } else {
             user = await User.create({
                 name: req.body.name,
@@ -48,7 +49,8 @@ router.post('/createuser', [
         const authToken = jwt.sign(data, JWT_SECRET);
         console.log(authToken);
         //return res.send(user);
-        res.json({ authToken });
+        success = true;
+        res.json({ success, authToken });
 
     } catch (err) {
         console.error(err.message);
