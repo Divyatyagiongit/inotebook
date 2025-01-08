@@ -39,9 +39,9 @@ const NoteState = (props) => {
         },
         body: JSON.stringify({ title: title, description: description, tag: tag })
       });
-      const resJson = response.json;
-      console.log(resJson)
-      const note =
+      const resJson = await response.json;
+      console.log("noteState.AddNote:" + resJson)
+      /*const note =
       {
         "_id": "676f631f51c615c974d659d1",
         "user": "675d42825407ede0b70b2ab9",
@@ -50,9 +50,12 @@ const NoteState = (props) => {
         "tag": tag,
         "date": "2021-09-03T14:20:09.668Z",
         "__v": 0
-      }
-      console.log(note)
+      }*/
+      const note = resJson
+      
       setNotes(notes.concat(note))
+      console.log(notes)
+      console.log("notes added successfully"+notes)
     } catch (e) {
       console.error(e);
     }
