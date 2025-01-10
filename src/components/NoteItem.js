@@ -14,7 +14,8 @@ const NoteItem = (props) => {
                 <div className="d-flex align-items-center">
                     <h5 className="card-title">{note.title}</h5>
                     <img src='./delete-icon.png' className="mx-1" 
-                    alt='delete' height={20} onClick={ ()=>{deleteNote(note._id)} }/>
+                    alt='delete' height={20} onClick={ ()=>{deleteNote(note._id); 
+                    props.showAlert("Deleted successfully","success")} }/>
                     <img src='./edit-icon.png' className="mx-1" 
                     alt='edit' height={20} onClick={    ()=>{updateNote(note)}  }/>
                 </div>
